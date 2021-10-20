@@ -4,19 +4,43 @@
 
 // Variables globales:
 char tab[NBL][NBC]; // OK pour le compilateur car *tout est déterminé* au moment de compiler
-int joueur;         // Joueur 1: =joueur = 0;= et Joueur 1: =joueur = 1;=
-int bin = 0         // Colone entrée par le joueur
-
+int bin = 0;         // Colone entrée par le joueur
+char token = 'X';    /* Jeton du joueur qui servira a definir le joueur 'X' ou 
+                        le joueur 'O' defini a 'X' car le premier joueur joue les 'X' */ 
+int check(char token); // verifie si un joueur à gagné 
 
   
 void main(void) {
   tab_init();
+  tab_test();
+  tab_print();
 
+  while(1)
+    {
+    printf("player %c's turn!", token);
+    choose();
+    tab_print();
+    
+    if(check('X'))
+      {
+      printf("\n\nPlayer X wins!\n\n");
+      break;
+    }
+    if(check('O'))
+      {
+      printf("\n\nPlayer O wins!\n\n");
+      break;
+    }
+      
+  }
 
+  return 0;
 }
 
 
-char tab_init(){
+
+char tab_init()
+{
   for(int l=0; l<NBL; l++){
     for(int c=0; c<NBC; c++){
       tab[l][c] = '.';
@@ -24,7 +48,8 @@ char tab_init(){
   }
 }
 
-void boucle() {
+void boucle()
+{
 
   while(!game_won && !game_full) {
     do {
@@ -38,15 +63,17 @@ void boucle() {
   }
 }
 
-void choose(){
+void choose()
+{
 
-  // chose the column
+  // choisiee la colonne 
   char c;
   
   printf("\nChoose column: ");
   scanf(" %c", &c);
 
-  switch (c){
+  switch (c)
+    {
   case 'A':
   case 'a':
   case '1':
@@ -82,4 +109,5 @@ void choose(){
   case '7':
     bin = 6;
     break;
+    }
 }
