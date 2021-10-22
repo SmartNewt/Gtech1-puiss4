@@ -48,20 +48,6 @@ char tab_init()
   }
 }
 
-void boucle()
-{
-
-  while(!game_won && !game_full) {
-    do {
-      // Saisie joueur:
-      int colonne, code_retour;
-      code_retour = scanf("%d", &colonne); // ATTENTION: on passe &colonne et pas colonne
-
-      // Tester code_retour (cf. =man 3 scanf=, section "RETURN VALUE").
-      int saisie_ok =  ; // construire un test en utilisant code_retour et la valeur de colonne
-    } while(!saisie_ok); // On recommence la saisie tant que ce n'est pas OK
-  }
-}
 
 void choose()
 {
@@ -109,5 +95,29 @@ void choose()
   case '7':
     bin = 6;
     break;
+    default:
+      bin = 9000;
+      printf("\nWrong letter or number ! Try again.\n\n");
+      tab_print();
     }
-}
+  if((bin >= 0 && bin <= 6) && (tab[0][bin] == '.'))
+    {
+      fill_bin();
+      token = (token == 'X') ? 'O' : 'X';
+      break;
+    }
+
+
+  void fill_bin()
+  {    // remplis la case en fonction de ce qu'il y a dans bin
+    int level; // niveau ou hauteur la plus basse
+
+    for (level = NBL-1; level >=0; level--)
+      {
+	if (tab[level][bin] == '.')
+	  {
+	    tab[level][bin] = token;
+	    break;
+	  }
+      }
+  }
