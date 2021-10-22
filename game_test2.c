@@ -87,7 +87,7 @@ void game_board_display() {
   for (l = 0; l < NBL; l++) {
     printf("\n%s\n", board_body);
     for (c = 0; c < NBC; c++) {
-      printf("%c", game_board_scores[l][c]);
+      printf("  %c ", game_board_scores[l][c]);
 
     }
 
