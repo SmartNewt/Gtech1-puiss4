@@ -80,18 +80,19 @@ void print_scores() {
 /*diplay game board(without initialize)*/
 void game_board_display() {
 
-  printf("%s", header_line);
+  printf("%s\n", header_line);
 
   int l, c;
 
   for (l = 0; l < NBL; l++) {
+    printf("\n%s\n", board_body);
     for (c = 0; c < NBC; c++) {
       printf("%c", game_board_scores[l][c]);
 
     }
-    printf("\n%s\n", board_body);
 
   }
+  printf("\n%s\n", board_body);
 
 
 }
@@ -156,6 +157,10 @@ void choose()
 	token = (token == 'X') ? 'O' : 'X';
 	break;
       }
+    else if(game_board_scores[0][bin] != ' '){
+      printf("\nThis column is full ! Try again. \n\n");
+      fill_bin();
+    }
 
   }
 }
