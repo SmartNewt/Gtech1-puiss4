@@ -119,7 +119,6 @@ void choose()
 
     if(bin < 0 || bin > NBC-1){
       printf("\nWrong number ! Try again.\n\n");
-      game_board_display();
       continue;
     }
 
@@ -146,8 +145,7 @@ void fill_bin(){
   for (level = NBL-1; level >=0; level--)
     {
       if (game_board_scores[level][bin] == ' ')
-	{
-	  game_board_scores[level][bin] = token;
+	{	  game_board_scores[level][bin] = token;
 	  break;
 	}
     }
