@@ -175,4 +175,17 @@ int check(char token){
       }
     }
   }
+  for (i = 0; i < NBL; i++){
+    for(j = 0; j < pos; j++){
+      c4 = 0;
+      for(k = 0; k < endgame_four; k++){
+        if(game_board_scores[i+k][j] == token){
+          ++c4;
+          if(c4 == endgame_four){
+            return 1;
+          }
+        }
+      }
+    }
+  }
 }
