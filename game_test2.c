@@ -17,7 +17,7 @@ void flushstdin();
 char header_line[] =   "  1   2   3   4   5   6   7";
 char board_body [] =  "|---|---|---|---|---|---|---|";
 char game_board_scores[NBL][NBC];
-
+  
 // Variables globales:
 int bin = 0;         // Colone entrée par le joueur
 char token = 'X';    /* Jeton du joueur qui servira a definir le joueur 'X' ou 
@@ -88,7 +88,7 @@ void game_board_display() {
   for (l = 0; l < NBL; l++) {
     printf("\n%s\n", board_body);
     for (c = 0; c < NBC; c++) {
-      printf("  %c ", game_board_scores[l][c]);
+      printf("| %c ", game_board_scores[l][c]);
 
     }
 
@@ -175,8 +175,11 @@ int check(char token){
       }
     }
   }
-  for (i = 0; i < NBL; i++){
-    for(j = 0; j < pos; j++){
+
+  pos = 3;
+    
+  for (j = 0; j < NBC; j++){
+    for(i = 0; i < pos; i++){
       c4 = 0;
       for(k = 0; k < endgame_four; k++){
         if(game_board_scores[i+k][j] == token){
@@ -188,4 +191,45 @@ int check(char token){
       }
     }
   }
+  int ii, jj;
+  for (i = 1; i < NBL - 1; i++){
+    for(j = 1; j < NBC - 1; j++){
+      c4 = 0;
+      for(ii = i, jj = j; (ii >= 0) || (jj >= 0); ii--, jj--){
+	if(game_board_scores[ii][jj] == token){
+	  ++c4;
+	  if(c4 == endgame_four) return 1;
+	}
+	else
+	  break;
+      }
+      for(ii = i + 1, jj = j + 1; (ii <= NBL - 1) || (jj <= NBC - 1); ii++, jj++){
+	if(game_board_scores[ii][jj] == token){
+	  c4++;
+	  if(c4 == endgame_four) return 1;
+	}
+	else
+	  break;
+      }
+      
+      c4 = 0;
+      for(ii = i, jj = j; (ii <= NBL - 1) || (jj >= 0); ii++, jj--){
+	if(game_board_scores[ii][jj] == token){
+	  c4++;
+	  if(c4 == endgame_four) return 1;
+	}
+	else
+	  break;
+      }
+      for(ii = i - 1, jj = j + 1; (ii >= 0) || (jj <= NBC - 1); ii--, jj++){
+	if(game_board_scores[ii][jj] == token){
+	  c4++;
+	  if(c4 == endgame_four) return 1;
+	}
+	else
+	  break;
+      }
+    }
+  }
+  return 0;
 }
